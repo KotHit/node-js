@@ -1,4 +1,9 @@
-FROM node:9-alpine
-MAINTAINER Pavlo Kudrynskyi 
-ENV abc=hello
-EXPOSE 8000
+FROM readytalk/nodejs
+
+  WORKDIR /app
+  ADD package.json /app/
+  RUN npm install
+  ADD . /app
+
+  CMD []
+  ENTRYPOINT ["/nodejs/bin/npm", "start"]
