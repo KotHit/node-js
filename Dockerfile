@@ -1,7 +1,7 @@
 FROM centos:latest
 
-RUN yum update -y \
-    && install -y git npm epel-release
+RUN yum update -y
+RUN install -y git epel-release npm
 
 RUN git clone https://github.com/KotHit/node-js.git
 RUN cd node-js 
