@@ -1,9 +1,19 @@
-FROM readytalk/nodejs
+FROM node:carbon
 
-  WORKDIR /app
-  ADD package.json /app/
-  RUN npm install
-  ADD . /app
+# Create app directory
+WORKDIR /usr/src/app
 
-  CMD []
-  ENTRYPOINT ["/nodejs/bin/npm", "start"]
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
+RUN npm install
+# If you are building your code for production
+# RUN npm install --only=production
+
+# Bundle app source
+COPY . .
+
+EXPOSE 8080
+CMD [ "npm", "start" ]
