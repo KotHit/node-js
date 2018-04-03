@@ -1,19 +1,11 @@
-FROM node:carbon
+FROM centos:latest
 
-# Create app directory
-WORKDIR /usr/src/app
+RUN yum update -y \
+    && install -y git npm epel-release
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
+RUN git clone https://github.com/KotHit/node-js.git
+RUN cd node-js 
 
-RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
+EXPOSE 3000
 
-# Bundle app source
-COPY . .
-
-EXPOSE 8080
-CMD [ "npm", "start" ]
+CMD [ "node", "app.js" ]
